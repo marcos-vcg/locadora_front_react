@@ -15,9 +15,8 @@ import Home from "./home/home";
 function Rotas() {
     return (
         <Routes>
-            Pagina Inicial
+            {/* Pagina Inicial */}
             <Route exact path={"/"} element={<Home />} />
-
 
 
             {/* Filme */}
@@ -35,6 +34,8 @@ function Rotas() {
                 path={CLIENT_URL + "/filme/form/:id"}
                 element={<FilmeForm />}
             />
+
+
             {/* Gênero */}
             <Route
                 exact

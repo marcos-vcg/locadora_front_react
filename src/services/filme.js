@@ -5,7 +5,7 @@ import api from "./api"
 export const ServiceFilme = {
 
     getTodos: () => {
-        return api.get("/filme");
+        return api.get("/filme")
     },
 
     prepararEditar: id => {
@@ -23,7 +23,7 @@ export const ServiceFilme = {
     },
 
     editar: (entity) => {
-        return api.put(`/filme/${entity.id}`, {
+        return api.put(`/filme`, {
             ...entity
         })
     }

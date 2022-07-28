@@ -23,7 +23,7 @@ export const ServiceGenero = {
     },
 
     editar: (entity) => {
-        return api.put(`/genero/${entity.id}`, {
+        return api.put(`/genero`, {
             ...entity
         })
     }

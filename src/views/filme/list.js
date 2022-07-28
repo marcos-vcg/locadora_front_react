@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom"
-import { Form, Col, Row, Spin, Button, Upload, Table, Space, PageHeader, Popconfirm } from "antd";
+import { Col, Button, Space, PageHeader, Popconfirm } from "antd";
 import TabelaAnt from "../../components/TabelaAnt/TabelaAnt";
 import { CLIENT_URL } from "../../config";
 import { Link } from "react-router-dom";
@@ -9,7 +9,7 @@ import { ServiceFilme } from "../../services/filme";
 
 
 export default function FilmeList() {
-    const [entities, setEntities] = useState([]);
+    const [filmes, setFilmes] = useState([]);
     const navigate = useNavigate();
 
 
@@ -21,9 +21,19 @@ export default function FilmeList() {
 
     const columns = [
         {
+            title: 'Id',
+            dataIndex: 'id',
+            key: 'id',
+        },
+        {
             title: 'Nome',
             dataIndex: 'nome',
             key: 'nome',
+        },
+        {
+            title: 'Descricao',
+            dataIndex: 'descricao',
+            key: 'descricao',
         },
         {
             title: 'Genero',
@@ -55,9 +65,10 @@ export default function FilmeList() {
 
 
     return (
-        <Col span={20}>
+        <Col span={24}>
             <PageHeader
                 title={"Lista de Filmes"}
+                onBack={() => navigate(CLIENT_URL + "/")}
                 extra={[
                     <Button
                         key="1"
@@ -71,7 +82,7 @@ export default function FilmeList() {
             <TabelaAnt
                 className={"tabela"}
                 columns={columns}
-                dataSource={entities.length ? entities : []}
+                dataSource={filmes?.length ? filmes : []}
             />
         </Col>
     )
@@ -79,8 +90,19 @@ export default function FilmeList() {
 
 
     async function carregaLista() {
-        let response = await ServiceFilme.getTodos()
-        setEntities(response.data.entities)
+        await ServiceFilme.getTodos().then((response) => {
+
+            // Percorre a lista e troca os objetos por somente seus nomes
+            response.data.map((filme) => {
+                filme.genero = filme.genero.nome
+
+                return filme
+            })
+
+            setFilmes(response.data)
+        });
+
+
     }
 
     async function deletar(id) {

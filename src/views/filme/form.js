@@ -1,80 +1,73 @@
 import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom"
+import { useNavigate, useParams } from "react-router-dom"
 import Select from "../../components/SelectAnt/select";
 import { Form, Col, Row } from "antd";
 import CabecalhoForm from "../../components/CabecalhoForm/pageHeader";
 import { ServiceFilme } from "../../services/filme"
 import { CLIENT_URL } from "../../config";
-import { DatePikerAnt } from "../../components/ImputDate/imputDate";
 import InputText from "../../components/ImputText/imputText";
+import { ServiceGenero } from "../../services/genero";
 
 
 export default function FilmeForm(props) {
-    const [entityInstance, setEntityInstance] = useState([]);
-    const [generoList, setGeneroList] = useState([])
-    const [categoriaList, setCategoriaList] = useState([])
-    const { id } = props.match.params;
+    const [filme, setFilme] = useState([]);
+    const [generosList, setGenerosList] = useState([])
+    const { id } = useParams();
     const [form] = Form.useForm();
     const navigate = useNavigate();
 
 
+
+
     useEffect(() => {
-        getModel()
+        carregarDados()
     }, [id])
 
     useEffect(() => {
         form.setFieldsValue({
-            nome: (entityInstance || {}).nome,
-            genero: (entityInstance || {}).genero,
-            categoria: (entityInstance || {}).categoria,
+            nome: filme?.nome,
+            descricao: filme?.descricao,
+            genero: filme?.genero?.id,
         });
-    }, [entityInstance]);
+    }, [filme]);
 
 
 
     return (
-        <Col span={20}>
+        <Col span={24}>
             <Form layout={"vertical"} form={form} onFinish={onFinish}>
                 <CabecalhoForm
                     title={id ? "Editar Filme" : "Novo Filme"}
                     onBack={"/filme"}
-                    onClickSalvar={handleSubmit}
+                    onClickSalvar={() => form.submit()}
                 />
                 <br />
                 <Row gutter={24}>
-                    <Col span={24}>
+                    <Col span={16}>
                         <InputText
                             name="nome"
                             label={"Nome"}
                             placeholder={"Nome"}>
                         </InputText>
                     </Col>
-                </Row>
-                <br />
-                <Row gutter={24}>
                     <Col span={8}>
                         <Select
                             name="genero"
                             label={"Genero"}
                             placeholder={"Genero"}
-                            list={generoList}
+                            list={generosList}
                         >
                         </Select>
                     </Col>
-                    <Col span={8}>
-                        <Select
-                            name="categoria"
-                            label={"Categoria"}
-                            placeholder={"Categoria"}
-                            list={categoriaList}
-                        >
-                        </Select>
-                    </Col>
-                    <Col span={7}>
-                        <DatePikerAnt
-                            name="lancamento"
-                            label={"Data de Lancamento"}>
-                        </DatePikerAnt>
+                </Row>
+                <br />
+                <Row gutter={24}>
+                    <Col span={24}>
+                        <InputText
+                            name="descricao"
+                            label={"Descricao"}
+                            placeholder={"Descricao"}>
+                        </InputText>
                     </Col>
                 </Row>
             </Form>
@@ -82,32 +75,29 @@ export default function FilmeForm(props) {
     )
 
 
+
+    // Ação a ser executada quando clicar em enviar formulário
     async function onFinish(values) {
-        console.log("values", values)
+
+        // ajustes para chegar de forma adequada no back-end
+        values.id = id
+        values.genero = { "id": values.genero }
+
+
         if (id) {
-            values.id = id
             await ServiceFilme.editar(values).then(() => navigate(CLIENT_URL + "/filme"));
         } else {
             await ServiceFilme.salvar(values).then(() => navigate(CLIENT_URL + "/filme"));
         }
     }
 
-    function handleSubmit(e) {
-        e.preventDefault();
-        form.submit()
-    }
 
 
-    async function getModel() {
-        let response
-        if (id) {
-            response = await ServiceFilme.prepararEditar(id)
-        }
-        console.log("response", response)
-        console.log("generoList", response.data.generoList)
-        setGeneroList(response.data.generoList)
-        setCategoriaList(response.data.categoriaList)
-        setEntityInstance(response.data.entityInstance)
+    // Carregar as informações iniciais do formulário
+    async function carregarDados() {
+
+        await ServiceGenero.getTodos().then((response) => { setGenerosList(response?.data) })
+        id && await ServiceFilme.prepararEditar(id).then((response) => { setFilme(response?.data) })
     }
 
 }

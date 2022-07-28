@@ -8,7 +8,7 @@ import {
   PlayCircleOutlined
 } from '@ant-design/icons';
 
-import { Breadcrumb, Layout, Menu } from 'antd';
+import { Layout, Menu } from 'antd';
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 
@@ -48,25 +48,17 @@ const App = () => {
     <Layout style={{ minHeight: '100vh' }}>
       <Sider collapsible collapsed={collapsed} onCollapse={(value) => setCollapsed(value)}>
         <div className="logo" />
-        <Menu theme="dark" defaultSelectedKeys={['']} defaultOpenKeys={['menu2']} mode="inline" items={items} />
+        <Menu theme="dark" defaultSelectedKeys={['']} defaultOpenKeys={['menu2']} mode="inline" items={items} selectable={false} />
       </Sider>
 
       <Layout className="site-layout">
         <Header
-          className="site-layout-background"
+          // className="site-layout-background"
           style={{ padding: 0 }}
         />
-        <Content style={{ margin: '0 16px' }} >
-          <Breadcrumb style={{ margin: '16px 0' }}>
-            <Breadcrumb.Item>Locadora</Breadcrumb.Item>
-            <Breadcrumb.Item>Filmes</Breadcrumb.Item>
-          </Breadcrumb>
-
-          <div
-            className="site-layout-background"
-            style={{ padding: 24, minHeight: 360, }}
-          >
-            <Rotas />
+        <Content className="site-layout-background" style={{ margin: '16px 16px' }} >
+          <div style={{ padding: 24, minHeight: 360, }} >
+            <Rotas />{/* Aqui será renderizado o componente da tela atual */}
           </div>
         </Content>
 
