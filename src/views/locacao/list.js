@@ -4,12 +4,12 @@ import { Col, Button, Space, PageHeader, Popconfirm } from "antd";
 import TabelaAnt from "../../components/TabelaAnt";
 import { CLIENT_URL } from "../../config";
 import { Link } from "react-router-dom";
-import { ServiceGenero } from "../../services/genero";
+import { ServiceFilme } from "../../services/filme";
 
 
 
-export default function GeneroList() {
-    const [entities, setEntities] = useState([]);
+export default function FilmeList() {
+    const [filmes, setFilmes] = useState([]);
     const navigate = useNavigate();
 
 
@@ -21,17 +21,24 @@ export default function GeneroList() {
 
     const columns = [
         {
-            title: 'ID',
+            title: 'Id',
             dataIndex: 'id',
             key: 'id',
-            align: 'center',
-
         },
         {
             title: 'Nome',
             dataIndex: 'nome',
             key: 'nome',
-            align: 'center',
+        },
+        {
+            title: 'Descricao',
+            dataIndex: 'descricao',
+            key: 'descricao',
+        },
+        {
+            title: 'Genero',
+            dataIndex: 'genero',
+            key: 'genero',
         },
         {
             title: 'Ações',
@@ -51,7 +58,6 @@ export default function GeneroList() {
                     </Button>
                 </Space>
             ),
-            align: 'center',
         },
     ];
 
@@ -61,22 +67,22 @@ export default function GeneroList() {
     return (
         <Col span={24}>
             <PageHeader
-                title={"Lista de Generos"}
+                title={"Lista de Locações"}
                 onBack={() => navigate(CLIENT_URL + "/")}
                 extra={[
                     <Button
                         key="1"
                         type="primary"
-                        onClick={() => navigate(CLIENT_URL + "/genero/form")}
+                        onClick={() => navigate(CLIENT_URL + "/locacao/form")}
                     >
-                        Novo Genero
+                        Nova Locacao
                     </Button>
                 ]}
             />
             <TabelaAnt
                 className={"tabela"}
                 columns={columns}
-                dataSource={entities?.length ? entities : []}
+                dataSource={filmes?.length ? filmes : []}
             />
         </Col>
     )
@@ -84,15 +90,26 @@ export default function GeneroList() {
 
 
     async function carregaLista() {
-        let response = await ServiceGenero.getTodos()
-        setEntities(response.data)
+        await ServiceFilme.getTodos().then((response) => {
+
+            // Percorre a lista e troca os objetos por somente seus nomes
+            response.data.map((filme) => {
+                filme.genero = filme.genero.nome
+
+                return filme
+            })
+
+            setFilmes(response.data)
+        });
+
+
     }
 
     async function deletar(id) {
-        await ServiceGenero.deletar(id).then(() => carregaLista())
+        await ServiceFilme.deletar(id).then(() => carregaLista())
     }
 
     function prepararEditar(id) {
-        return CLIENT_URL + "/genero/form/" + id
+        return CLIENT_URL + "/locacao/form/" + id
     }
 }

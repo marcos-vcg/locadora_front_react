@@ -1,5 +1,6 @@
 import {
   DesktopOutlined,
+  FormOutlined,
   FileOutlined,
   UserOutlined,
   TagsOutlined,
@@ -28,14 +29,15 @@ function getItem(label, key, icon, children) {
 }
 
 const items = [
-  getItem('Telas', 'menu2', <DesktopOutlined />, [
+  getItem('Página Inicial', 'menu1', <Link to={"/"} ><DesktopOutlined /></Link>),
+  getItem('Cadastros', 'menu2', <FormOutlined />, [
     getItem('Gêneros', 'subMenu1', <Link to={"/genero"} ><TagsOutlined /></Link>),
     getItem('Filmes', 'subMenu2', <Link to={"/filme"} ><PlayCircleOutlined /></Link>),
+    getItem('Clientes', 'subMenu3', <Link to={"/cliente"} ><UserOutlined /></Link>),
   ]),
-  getItem('Locação', 'menu1', <SearchOutlined />),
-  getItem('Clientes', 'menu3', <UserOutlined />),
-  getItem('Relatórios', 'menu4', <FileOutlined />),
-  getItem('Configurações', 'menu5', <SettingOutlined />),
+  getItem('Locação', 'menu3', <Link to={"/locacao"} ><SearchOutlined /></Link>),
+  getItem('Relatórios', 'menu4', <Link to={"/relatorio"} ><FileOutlined /></Link>),
+  getItem('Configurações', 'menu5', <Link to={"/config"} ><SettingOutlined /></Link>),
 ];
 
 

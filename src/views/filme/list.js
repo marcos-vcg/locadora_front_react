@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom"
 import { Col, Button, Space, PageHeader, Popconfirm } from "antd";
-import TabelaAnt from "../../components/TabelaAnt/TabelaAnt";
+import TabelaAnt from "../../components/TabelaAnt";
 import { CLIENT_URL } from "../../config";
 import { Link } from "react-router-dom";
 import { ServiceFilme } from "../../services/filme";
@@ -24,21 +24,25 @@ export default function FilmeList() {
             title: 'Id',
             dataIndex: 'id',
             key: 'id',
+            align: 'center',
         },
         {
             title: 'Nome',
             dataIndex: 'nome',
             key: 'nome',
+            align: 'center',
         },
         {
             title: 'Descricao',
             dataIndex: 'descricao',
             key: 'descricao',
+            align: 'center',
         },
         {
             title: 'Genero',
             dataIndex: 'genero',
             key: 'genero',
+            align: 'center',
         },
         {
             title: 'Ações',
@@ -58,6 +62,7 @@ export default function FilmeList() {
                     </Button>
                 </Space>
             ),
+            align: 'center',
         },
     ];
 

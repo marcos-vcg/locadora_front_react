@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom"
-import InputText from "../../components/ImputText/imputText";
+import InputText from "../../components/InputText";
 import { Form, Col, Row } from "antd";
-import CabecalhoForm from "../../components/CabecalhoForm/pageHeader";
+import CabecalhoForm from "../../components/CabecalhoForm";
 import { ServiceGenero } from "../../services/genero"
 import { CLIENT_URL } from "../../config";
 
@@ -19,9 +19,7 @@ export default function GeneroForm() {
 
     const { nome } = genero;
 
-    const onInputChange = (e) => {
-        setGenero({ ...genero, [e.target.name]: e.target.value })
-    }
+
 
 
 
@@ -52,8 +50,8 @@ export default function GeneroForm() {
                             name="nome"
                             label={"Nome"}
                             placeholder={"Nome"}
-                            value={nome}
-                            onChange={(e) => onInputChange(e)}>
+                            isRequired={true}
+                        >
                         </InputText>
                     </Col>
                 </Row>
