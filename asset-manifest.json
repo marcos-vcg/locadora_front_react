@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/locadora-front-react/static/css/main.6ece6bda.css",
+    "main.js": "/locadora-front-react/static/js/main.6d168e95.js",
+    "index.html": "/locadora-front-react/index.html",
+    "main.6ece6bda.css.map": "/locadora-front-react/static/css/main.6ece6bda.css.map",
+    "main.6d168e95.js.map": "/locadora-front-react/static/js/main.6d168e95.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.6ece6bda.css",
+    "static/js/main.6d168e95.js"
+  ]
+}
