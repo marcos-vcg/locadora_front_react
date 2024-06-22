@@ -61,7 +61,7 @@ export default function GeneroList() {
     return (
         <Col span={24}>
             <PageHeader
-                title={"Lista de Generos"}
+                title={"Listas de Gener"}
                 onBack={() => navigate(CLIENT_URL + "/")}
                 extra={[
                     <Button
