@@ -44,12 +44,12 @@ const items = [
 
 
 const App = () => {
-  const [collapsed, setCollapsed] = useState(false);
+  const [collapsed, setCollapsed] = useState(true);
 
   return (
     <Layout style={{ minHeight: '100vh' }}>
       <Sider collapsible collapsed={collapsed} onCollapse={(value) => setCollapsed(value)}>
-        <div className="logo" />
+        <div className="logo" >Locadora</div>
         <Menu theme="dark" defaultSelectedKeys={['']} defaultOpenKeys={['menu2']} mode="inline" items={items} selectable={false} />
       </Sider>
 
@@ -65,7 +65,7 @@ const App = () => {
         </Content>
 
         <Footer style={{ textAlign: 'center' }} >
-          Created by Marcos Costa ©2022
+          Created by Marcos Costa ©
         </Footer>
 
       </Layout>
