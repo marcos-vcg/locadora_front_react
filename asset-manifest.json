@@ -1,13 +1,13 @@
 {
   "files": {
     "main.css": "/locadora_front_react/static/css/main.6ece6bda.css",
-    "main.js": "/locadora_front_react/static/js/main.42421550.js",
+    "main.js": "/locadora_front_react/static/js/main.45f3819d.js",
     "index.html": "/locadora_front_react/index.html",
     "main.6ece6bda.css.map": "/locadora_front_react/static/css/main.6ece6bda.css.map",
-    "main.42421550.js.map": "/locadora_front_react/static/js/main.42421550.js.map"
+    "main.45f3819d.js.map": "/locadora_front_react/static/js/main.45f3819d.js.map"
   },
   "entrypoints": [
     "static/css/main.6ece6bda.css",
-    "static/js/main.42421550.js"
+    "static/js/main.45f3819d.js"
   ]
 }
