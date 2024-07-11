@@ -40,11 +40,11 @@ const items = [
   getItem('Configurações', 'menu5', <Link to={"/config"} ><SettingOutlined /></Link>),
 ];
 
-const MenuBar = ({ isCollapsed, setCollapsed, isSmallDevice }) => {
+const MenuBar = ({ collapsed, setCollapsed, isSmallDevice }) => {
   return (
     isSmallDevice ? <NavBar isSmallDevice={isSmallDevice} /> :
 
-      <Sider collapsible collapsed={isCollapsed} onCollapse={(value) => setCollapsed(value)}>
+      <Sider collapsible collapsed={collapsed} onCollapse={(value) => setCollapsed(value)}>
         {/* <div className="logo" >Locadora</div> */}
         <NavBar />
       </Sider>
@@ -55,19 +55,22 @@ const MenuBar = ({ isCollapsed, setCollapsed, isSmallDevice }) => {
 
 const NavBar = ({ isSmallDevice }) => {
   return (
-    <Menu
-      theme="dark"
-      defaultSelectedKeys={['']}
-      defaultOpenKeys={['menu2']}
-      // mode="inline"
-      mode={isSmallDevice ? "horizontal" : "vertical"}
-      items={items}
-      selectable={false} />
+    <>
+      {/* <div className="logo" >Locadora</div> */}
+      <Menu
+        theme="dark"
+        defaultSelectedKeys={['']}
+        defaultOpenKeys={['menu1']}
+        // mode="inline"
+        mode={isSmallDevice ? "horizontal" : "vertical"}
+        items={items}
+        selectable={false} />
+    </>
   )
 }
 
 const App = () => {
-  const [isCollapsed, setCollapsed] = useState(true);
+  const [collapsed, setCollapsed] = useState(false);
   // const [currentWidth, setCurrentWidth] = useState('');
   const [isSmallDevice, setSmallDevice] = useState(true);
 
@@ -98,7 +101,7 @@ const App = () => {
         items={items}
         selectable={false} /> */}
       {/* </Sider> */}
-      <MenuBar collapsed={isCollapsed} setCollapsed={setCollapsed} isSmallDevice={isSmallDevice} />
+      <MenuBar collapsed={collapsed} setCollapsed={setCollapsed} isSmallDevice={isSmallDevice} />
 
       <Layout className="site-layout">
         {/* <Header
