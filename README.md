@@ -2,6 +2,11 @@
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+## Added Functionalities
+- Add the React App to the GitHub Pages with GhPages -> Running npm run build
+- Created a GitHub Workflow to Deploy when push to remote -> It will run npm run build
+
+
 ## Available Scripts
 
 In the project directory, you can run:
